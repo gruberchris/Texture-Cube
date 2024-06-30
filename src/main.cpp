@@ -258,7 +258,7 @@ int main() {
         auto model = glm::mat4(1.0f);
 
         // Apply transformations to the model matrix to rotate it around the y-axis at a rate of 50 degrees per second
-        //model = glm::rotate(model, glm::radians((float)glfwGetTime() * 50.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 50.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
         // Set the view and projection matrices in the shader
         glm::mat4 view = camera.getViewMatrix();
@@ -268,14 +268,14 @@ int main() {
         shader.setMat4("projection", projection);
 
         // update the uniform color
-        //double timeValue = glfwGetTime();
+        double timeValue = glfwGetTime();
         // Dividing by 2.0f scales the result of the sine function to range between -0.5 and 0.5.
         // Adding 0.5f shifts the range of values to be between 0 and 1.
-        //float redValue = ((float)sin(timeValue) / 2.0f) + 0.5f;
-        //float greenValue = ((float)sin(timeValue + 10) / 2.0f) + 0.5f;
-        //float blueValue = 0;
-        //int vertexColorLocation = glGetUniformLocation(shader.getProgramID(), "cubeColor");
-        //glUniform4f(vertexColorLocation, redValue, greenValue, blueValue, 1.0f);
+        float redValue = ((float)sin(timeValue) / 2.0f) + 0.5f;
+        float greenValue = ((float)sin(timeValue + 10) / 2.0f) + 0.5f;
+        float blueValue = 0;
+        int vertexColorLocation = glGetUniformLocation(shader.getProgramID(), "cubeColor");
+        glUniform4f(vertexColorLocation, redValue, greenValue, blueValue, 1.0f);
 
         glBindVertexArray(VAO); // Bind the VAO
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
