@@ -1,6 +1,8 @@
-# OpenGL macOS Project Template
+# Texture Cube
 
-This is a template project for macOS that uses OpenGL. It is a simple project that renders a triangle to the screen. The project uses CMake to build the project and uses the GLFW library to create an OpenGL context.
+This project is a simple OpenGL application that renders a cube with a texture applied to it.
+
+![img.png](img.png)
 
 ## Building the Project
 
