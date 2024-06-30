@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
-project(opengl-macos-project-template)
+project(TextureCube)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -10,9 +10,11 @@ include_directories(
         ${PROJECT_SOURCE_DIR}/libs
         ${PROJECT_SOURCE_DIR}/libs/glfw-3.4/include
         ${PROJECT_SOURCE_DIR}/libs/glad/include
+        ${PROJECT_SOURCE_DIR}/libs/stb/include
+        ${PROJECT_SOURCE_DIR}/libs/glm
 )
 
-add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${PROJECT_SOURCE_DIR}/libs/glad/src/glad.c)
+add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${PROJECT_SOURCE_DIR}/libs/glad/src/glad.c ${PROJECT_SOURCE_DIR}/libs/stb/src/stb_image.cpp)
 
 if(APPLE AND CMAKE_SYSTEM_PROCESSOR STREQUAL "arm64")
     set(GLFW_LIB_PATH ${PROJECT_SOURCE_DIR}/libs/glfw-3.4/lib-arm64/libglfw.3.dylib)
@@ -47,3 +49,17 @@ file(GLOB SHADERS
 # Add an install target to copy shaders
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 install(FILES ${SHADERS} DESTINATION shaders)
+
+# Define texture files
+file(GLOB TEXTURES
+        "${PROJECT_SOURCE_DIR}/assets/textures/*"
+)
+
+# Copy the textures directory to the output directory
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/assets/textures $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets/textures)
+
+# Add an install target to copy textures
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)
+install(FILES ${TEXTURES} DESTINATION assets/textures)
