@@ -254,7 +254,7 @@ int main() {
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture);
 
-        // Create the model identity matrix
+        // Initialize matrices
         auto model = glm::mat4(1.0f);
         auto view = glm::mat4 (1.0f);
         auto projection = glm::mat4 (1.0f);
