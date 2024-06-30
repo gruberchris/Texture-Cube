@@ -19,7 +19,8 @@ public:
 
     // Utility functions
     [[nodiscard]] GLuint getProgramID() const;
-    [[nodiscard]] bool isCompiled() const;
+
+    [[maybe_unused]] [[nodiscard]] bool isCompiled() const;
     void setMat4(const std::string &name, const glm::mat4 &mat) const;
 
 private:

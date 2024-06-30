@@ -99,7 +99,7 @@ GLuint Shader::getProgramID() const {
     return programID;
 }
 
-bool Shader::isCompiled() const {
+[[maybe_unused]] bool Shader::isCompiled() const {
     GLint success;
     GLchar infoLog[512];
     glGetShaderiv(vertexID, GL_COMPILE_STATUS, &success);
